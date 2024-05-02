@@ -1,0 +1,54 @@
+<%- include('partials/header') %>
+<main>
+    <div class="upper-banner">
+        <h1>Edit Your Gear Listing</h1>
+    </div>
+    <div class="container mt-5">
+        <div class="row row-sell">
+            <div class="col-md-6 offset-md-3">
+                <div class="sell-form">
+                    <div class="sell-form-body">
+                        <form action="/items/edit/<%= item.id %>" method="post" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <!-- Copy and past of submit form but just pulls details from selected item and updates array-->
+                                <label for="itemCondition">Condition</label>
+                                <select class="form-control form-sell" id="itemCondition" name="condition">
+                                    <option <%= item.condition === 'New' ? 'selected' : '' %>>New</option>
+                                    <option <%= item.condition === 'Mint' ? 'selected' : '' %>>Mint</option>
+                                    <option <%= item.condition === 'Good' ? 'selected' : '' %>>Good</option>
+                                    <option <%= item.condition === 'Fair' ? 'selected' : '' %>>Fair</option>
+                                    <option <%= item.condition === 'Used' ? 'selected' : '' %>>Used</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="itemTitle">Title</label>
+                                <input type="text" class="form-control form-sell" id="itemTitle" name="title" value="<%= item.title %>" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="itemPrice">Price</label>
+                                <input type="number" class="form-control form-sell" id="itemPrice" name="price" value="<%= item.price %>" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="itemDetails">Details</label>
+                                <textarea class="form-control form-sell" id="itemDetails" name="details" rows="3"><%= item.details %></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="itemSeller">Seller Name</label>
+                                <input type="text" class="form-control form-sell" id="itemSeller" name="seller" value="<%= item.seller %>" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="itemImage">Image</label>
+                                <div>
+                                    <img src="<%= item.image %>" alt="Current Image" style="max-width: 100px; max-height: 100px;">
+                                </div>
+                                <input type="file" class="form-control-file" id="itemImage" name="image">
+                            </div>
+                            <button type="submit" class="btn btn-primary submitbtn">Update</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<%- include('partials/footer') %>

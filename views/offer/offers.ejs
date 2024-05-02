@@ -1,0 +1,28 @@
+<%- include('../partials/header') %>
+<main class="container mt-5">
+<h1 class="top-txt">Offers</h1>
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th>Buyer</th>
+            <th>Offer Amount</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% offers.forEach(offer => { %>
+        <tr>
+            <td><%= offer.user.firstName %></td>
+            <td>$<%= offer.amount %></td>
+            <td>
+                <form action="/offers/acceptOffer/<%= offer._id %>" method="POST">
+                    <button type="submit" class="btn btn-primary btn-custom">Accept Offer</button>
+                </form>
+            </td>
+        </tr>
+        <% }) %>
+    </tbody>
+</table>
+</main>
+<%- include('../partials/footer') %>

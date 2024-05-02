@@ -1,0 +1,27 @@
+<%- include('partials/header') %>
+<main>
+    <div class="container mt-5">
+        <div class="row d-flex align-items-center justify-content-center">
+            <% if(items && items.length > 0) { %>
+                <% items.forEach(function(item) { %>
+                    <div class="col-md-3">
+                        <div class="card" onclick="location.href='/items/<%= item._id %>';">
+                            <img src="<%= item.image %>" class="card-img-top" alt="<%= item.title %> Image">
+                            <div class="card-body">
+                                <h5 class="card-title"><%= item.title %></h5>
+                                <p class="card-text">Price: $<%= item.price.toFixed(2) %></p>
+                                <p class="card-text">Condition: <%= item.condition %></p>
+                                <p class="card-text">Offers: <%= item.totalOffers %></p> 
+                            </div>
+                        </div>
+                    </div>
+                <% }); %>
+            <% } else { %>
+                <div class="col-12">
+                    <h1 class="text-center">No items found.</h1>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</main>
+<%- include('partials/footer') %>

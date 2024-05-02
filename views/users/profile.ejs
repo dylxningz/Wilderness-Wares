@@ -1,0 +1,70 @@
+<%- include('../partials/header') %>
+<main class="container mt-5">
+    <div class="card card-noclick">
+        <div class="card-header">
+            <h1 class="top-txt">Hello, <%= user.firstName %>!</h1>
+        </div>
+        <div class="card-body">
+            <h4 class="mt-4">Items Listed by You</h4>
+            <% if(user.items && user.items.length > 0) { %>
+                <div class="row">
+                    <% user.items.forEach(function(item) { %>
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100">
+                                <a href="/items/<%= item._id %>" class="card-link-custom" style="color: inherit; text-decoration: none;">
+                                    <% if(item.image) { %>
+                                        <img src="<%= item.image %>" class="card-img-top" alt="<%= item.title %> image">
+                                    <% } else { %>
+                                        <img src="/path/to/default-image.png" class="card-img-top" alt="Default image">
+                                    <% } %>
+                                    <div class="card-body">
+                                        <h5 class="card-title"><%= item.title %></h5>
+                                        <p class="card-text">$<%= item.price %> - <%= item.totalOffers %> offers</p>
+                                        <p class="card-text"><%= item.active ? 'Active' : 'Deactive' %></p>
+                                    </div>
+                                </a>
+                                <div class="card-footer bg-white">
+                                    <a href="/items/edit/<%= item._id %>" class="btn btn-primary btn-custom" onclick="event.stopPropagation();">Edit</a>
+                                    <form action="/items/delete/<%= item._id %>" method="POST" style="display: inline;" onclick="event.stopPropagation();">
+                                        <button type="submit" class="btn btn-danger btn-custom">Delete</button>
+                                    </form>
+                                    <a href="/items/<%= item._id %>/offers" class="btn btn-info btn-custom" onclick="event.stopPropagation();">View Offers</a>
+                                </div>
+                            </div>
+                        </div>
+                    <% }); %>
+                </div>
+            <% } else { %>
+                <div class="alert alert-info" role="alert">
+                    You have not listed any items yet.
+                </div>
+            <% } %>
+        </div>
+
+        <div class="card card-noclick mt-4">
+            <div class="card-header">
+                <h4 class="top-txt">Offers You've Made</h4>
+            </div>
+            <div class="card-body">
+                <% if(offersMade && offersMade.length > 0) { %>
+                    <div class="row">
+                        <% offersMade.forEach(function(offer) { %>
+                            <div class="col-md-4 mb-4">
+                                <div class="card h-100">
+                                    <div class="card-body card-noclick">
+                                        <h5 class="card-title"><%= offer.item.title %></h5>
+                                        <p class="card-text txt-m">Offer Amount: $ <%= offer.amount %></p>
+                                        <p class="card-text txt-m">Status: <%= offer.status %></p>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }); %>
+                    </div>
+                <% } %>
+            </div>
+                                    
+                                        
+        </div>
+    </div>
+</main>
+<%- include('../partials/footer') %>

@@ -1,0 +1,22 @@
+<%- include('partials/header') %>
+<main class="container mt-5 error-background">
+    <div class="row">
+        <div class="col-12 text-center">
+            <div class="err">
+            <% if (error && error.status) { %>
+                <h1>Error <%= error.status %></h1>
+            <% } else { %>
+                <h1>Error</h1>
+            <% } %>
+            
+            <% if (error && error.message) { %>
+                <p><%= error.message %></p>
+            <% } else { %>
+                <p>Sorry, an unexpected error occurred.</p>
+            <% } %>
+            <a href="/" class="btn btn-err">Go Back Home</a>
+            </div>
+        </div>
+    </div>
+</main>
+<%- include('partials/footer') %>

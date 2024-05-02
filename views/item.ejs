@@ -1,0 +1,47 @@
+<%- include('partials/header') %>
+<main>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-4 centered-content">
+                <div class="centered-image">
+                    <img src="<%= item.image %>" alt="<%= item.title %> image" class="img-fluid">
+                </div>
+            </div>
+            <div class="col-md-8 item-txt">
+                <h2>
+                    <%= item.title %>
+                    <% if(item.active) { %>
+                        <span class="badge badge-success">Active</span>
+                    <% } else { %>
+                        <span class="badge badge-secondary">Inactive</span>
+                    <% } %>
+                </h2>
+                <p><strong>Condition:</strong> <%= item.condition %></p>
+                <p><strong>Price/Offers:</strong> $<%= item.price %> / <%= item.totalOffers %> offers</p>
+                <p><strong>Seller:</strong> <%= item.seller.firstName %> <%= item.seller.lastName %></p>
+                <p><strong>Description:</strong> <%= item.details %></p>
+                <% if(item.active) { %>
+                    <form action="/offers/makeOffer/<%= item._id %>" method="POST">
+                        <input type="hidden" name="itemId" value="<%= item._id %>">
+                        <input type="number" class="form-control" id="offerAmount" name="offerAmount" required>
+                        <button type="submit" class="btn btn-primary">Make Offer</button>
+                    </form>
+                    
+                    <p>
+                        <strong>Current Highest Offer:</strong> $
+                        <% if (item.highestOffer) { %>
+                            <%= item.highestOffer %>
+                        <% } else { %>
+                            No offers yet
+                        <% } %>
+                    </p>
+                    
+                <% } else { %> 
+                    <p class="alert alert-info">This item has been sold and is no longer available.</p>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</main>
+
+<%- include('partials/footer') %>
