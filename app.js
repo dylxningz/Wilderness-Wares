@@ -8,7 +8,7 @@ const cookieParser = require('cookie-parser');
 const app = express();
 
 const port = 3000;
-const dbURI = "mongodb+srv://jeffreydylangreene:wyuvBkAljzvasb6p@project3.zkenqab.mongodb.net/?retryWrites=true&w=majority&appName=project3";
+const dbURI = "<MONGO DB SERVER URI>";
 mongoose.connect(dbURI)
   .then(() => console.log('Connected to MongoDB Atlas'))
   .catch((err) => console.log(err));
